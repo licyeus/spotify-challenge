@@ -9,32 +9,42 @@
         <p>You may not vote multiple times for the same song.</p>
     </div>
 
+    <div ng-if="vote.hasAlreadyVoted" class="alert alert-success">
+        You have already voted for this week's songs. Voting again will update your song preferences.
+    </div>
+
     <hr>
 
-    <div class="form-group">
-        <label for="email">Please enter your email address</label>
-        <input class="form-control" type="email" name="email" ng-model="vote.email">
-    </div>
+    <form name="contestVote" ng-submit="vote.submitVote()">
+        <div class="form-group">
+            <label for="email">Please enter your email address</label>
+            <input class="form-control" type="email" name="email" ng-model="vote.email">
+        </div>
 
-    <div class="form-group">
-        <label for="first">First choice (3 points)</label>
-        <select class="form-control" name="first" ng-model="vote.first" ng-options="song.id as song.name for song in contest.songs">
-            <option value=""></option>
-        </select>
-    </div>
+        <div class="form-group">
+            <label for="first">First choice (3 points)</label>
+            <select class="form-control" name="first" ng-model="vote.first" ng-options="song.id as song.name for song in contest.songs">
+                <option value=""></option>
+            </select>
+        </div>
 
-    <div class="form-group">
-        <label for="second">Second choice (2 points)</label>
-        <select class="form-control" name="second" ng-model="vote.second" ng-options="song.id as song.name for song in contest.songs">
-            <option value=""></option>
-        </select>
-    </div>
+        <div class="form-group">
+            <label for="second">Second choice (2 points)</label>
+            <select class="form-control" name="second" ng-model="vote.second" ng-options="song.id as song.name for song in contest.songs">
+                <option value=""></option>
+            </select>
+        </div>
 
-    <div class="form-group">
-        <label for="third">Third choice (1 points)</label>
-        <select class="form-control" name="third" ng-model="vote.third" ng-options="song.id as song.name for song in contest.songs">
-            <option value=""></option>
-        </select>
-    </div>
+        <div class="form-group">
+            <label for="third">Third choice (1 points)</label>
+            <select class="form-control" name="third" ng-model="vote.third" ng-options="song.id as song.name for song in contest.songs">
+                <option value=""></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button class="pull-right btn btn-primary" type="submit">Vote</button>
+        </div>
+    </form>
 </div>
 

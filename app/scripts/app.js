@@ -1,19 +1,21 @@
-'use strict';
+(function () {
+    'use strict';
 
-/**
- * @ngdoc overview
- * @name voteApp
- * @description
- * # voteApp
- *
- * Main module of the application.
- */
-angular.module('voteApp', [
-  'ui.router',
-  'ngAnimate',
-  'ngSanitize',
-  'ngTouch'
-]);
+    angular.module('voteApp', [
+        'ui.router',
+        'ngAnimate',
+        'ngSanitize',
+        'ngTouch'
+    ]);
 
-angular.config('voteApp', function() {
-});
+    angular.module('voteApp').config(function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/vote');
+
+        $stateProvider
+            .state('vote', {
+                url: '/vote',
+                templateUrl: 'views/vote.html',
+                controller: 'VoteController as vote'
+            });
+    });
+})();
