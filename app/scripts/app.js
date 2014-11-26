@@ -17,6 +17,16 @@
                 url: '/vote',
                 templateUrl: 'views/vote.html',
                 controller: 'VoteController as vote'
+            })
+            .state('results', {
+                url: '/results',
+                templateUrl: 'views/results.html',
+                controller: 'ResultsController as results'
+            })
+            .state('admin', {
+                url: '/admin',
+                templateUrl: 'views/admin.html',
+                controller: 'AdminController as admin'
             });
     });
 })();

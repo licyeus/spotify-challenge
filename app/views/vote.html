@@ -23,21 +23,21 @@
 
         <div class="form-group">
             <label for="first">First choice (3 points)</label>
-            <select class="form-control" name="first" ng-model="vote.first" ng-options="song.id as song.name for song in vote.data.songs">
+            <select class="form-control" name="first" ng-model="vote.first" ng-options="song.id as song.title for song in vote.data.songs">
                 <option value=""></option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="second">Second choice (2 points)</label>
-            <select class="form-control" name="second" ng-model="vote.second" ng-options="song.id as song.name for song in vote.data.songs">
+            <select class="form-control" name="second" ng-model="vote.second" ng-options="song.id as song.title for song in vote.data.songs">
                 <option value=""></option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="third">Third choice (1 points)</label>
-            <select class="form-control" name="third" ng-model="vote.third" ng-options="song.id as song.name for song in vote.data.songs">
+            <select class="form-control" name="third" ng-model="vote.third" ng-options="song.id as song.title for song in vote.data.songs">
                 <option value=""></option>
             </select>
         </div>

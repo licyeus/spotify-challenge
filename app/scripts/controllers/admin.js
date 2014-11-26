@@ -1,9 +1,9 @@
 (function() {
   'use strict';
 
-  angular.module('voteApp').controller('VoteController', VoteController);
+  angular.module('voteApp').controller('AdminController', AdminController);
 
-  function VoteController($firebase) {
+  function AdminController($firebase) {
     var vm = this;
     var ref = new Firebase('https://vivid-torch-4819.firebaseio.com/data');
 
@@ -17,17 +17,18 @@
         });
     }
 
-    vm.submitVote = function() {
-        var vote = {
-            id: generateGuid(),
-            email: vm.email,
-            first: vm.first,
-            second: vm.second,
-            third: vm.third,
-            timestamp: Firebase.ServerValue.TIMESTAMP
-        };
-        vm.data.votes.push(vote);
+    // TODO: create song import process
+
+    vm.addSong = function(song) {
+        song.id = generateGuid();
+        song.timestamp = Firebase.ServerValue.TIMESTAMP;
+        vm.data.songs.push(song);
         vm.data.$save();
+    };
+
+    vm.songWithId = function(id) {
+        var song = _.find(vm.data.songs, function(song) { return song.id == id; });
+        return song.artist + ' - "' + song.title + '"';
     };
 
     function generateGuid() {
