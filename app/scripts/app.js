@@ -5,7 +5,8 @@
         'ui.router',
         'ngAnimate',
         'ngSanitize',
-        'ngTouch'
+        'ngTouch',
+        'firebase'
     ]);
 
     angular.module('voteApp').config(function($stateProvider, $urlRouterProvider) {
