@@ -3,29 +3,18 @@
 
     angular.module('voteApp').controller('ResultsController', ResultsController);
 
-    function ResultsController($firebase, dataService) {
-        var vm = this;
-        var ref = new Firebase('https://vivid-torch-4819.firebaseio.com/data');
-
-        activate();
-
-        function activate() {
-            vm.data = $firebase(ref).$asObject();
-            vm.data.$loaded().then(function() {
-                vm.data.songs = vm.data.songs || [];
-                vm.data.votes = vm.data.votes || [];
-
-                populateVotes();
-            });
-        }
-
+    function ResultsController($scope, dataContext) {
         function populateVotes() {
+            /*
             var groupedVotes = _.groupBy(vm.data.votes, function(vote) { return vote.email; });
             var finalVotes = _.map(groupedVotes, function(votesForEmail) { return _.sortBy(votesForEmail, 'timestamp').reverse()[0]; });
             vm.voteMap = _.map(finalVotes, function(vote) { return { first: vote.first, second: vote.second, third: vote.third }; });
+            */
         }
 
-        vm.scoreForSong = function(song) {
+        $scope.scoreForSong = function(song) {
+            return 0;
+            /*
             var tally = 0;
             _.each(vm.voteMap, function(vote) {
                 if(song.id == vote.first) {
@@ -37,9 +26,8 @@
                 }
             });
             return tally;
+            */
         };
-
-        return vm;
     }
 })();
 

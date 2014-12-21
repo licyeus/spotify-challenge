@@ -1,7 +1,7 @@
 <div class="container">
     <h4>
-        <span class="text-muted">Week {{ results.data.weekNumber }} Results:</span>
-        {{ results.data.theme }}
+        <span class="text-muted">Week {{ weekNumber }} Results:</span>
+        {{ theme }}
     </h4>
 
     <table class="table table-striped table-bordered">
@@ -10,13 +10,12 @@
             <th>Score</th>
         </thead>
         <tbody>
-            <tr ng-repeat="song in results.data.songs">
+            <tr ng-repeat="song in songs">
                 <td>
-                    <strong>{{ song.artist }}</strong> -
-                    <em>{{ song.title }}</em>
+                    <strong>{{ getSongName(song) }}</strong>
                 </td>
                 <td>
-                    {{ results.scoreForSong(song) }}
+                    {{ scoreForSong(song) }}
                 </td>
             </tr>
         </tbody>

@@ -3,23 +3,20 @@
 
     angular.module('voteApp').controller('VoteController', VoteController);
 
-    function VoteController($scope, dataContext) {
-        $scope.metadata = dataContext.getMetadata();
-        $scope.songs = dataContext.getSongs();
-        $scope.votes = dataContext.getVotes();
+    function VoteController($scope, metadata, songs, votes, dataContext) {
+        $scope.metadata = metadata;
+        $scope.songs = songs;
+        $scope.votes = votes;
 
-        $scope.email = 'andrew@inkblot.io';
-        $scope.first = "190jyVPHYjAqEaOGmMzdyk";
-        $scope.second = "6bDRVbdZEyBnmOX0Yjh5rf";
-        $scope.third = "0Wl5nDLyOLyYL0vCXjhtt7";
+        $scope.vote = {
+            email: 'andrew@inkblot.io',
+            first: '190jyVPHYjAqEaOGmMzdyk',
+            second:  '6bDRVbdZEyBnmOX0Yjh5rf',
+            third: '0Wl5nDLyOLyYL0vCXjhtt7'
+        };
 
         $scope.submitVote = function() {
-            var vote = {
-                email: $scope.email,
-                first: $scope.first,
-                second: $scope.second,
-                third: $scope.third
-            };
+            var vote = $scope.vote;
             dataContext.saveVote(vote);
         };
 

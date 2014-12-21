@@ -5,7 +5,7 @@
 
     angular.module('voteApp').constant('FIREBASE_URI', 'https://vivid-torch-4819.firebaseio.com');
 
-    function dataContext(FIREBASE_URI, $firebase) {
+    function dataContext($q, FIREBASE_URI, $firebase) {
         var songsRef = new Firebase(FIREBASE_URI + '/songs');
         var songs = $firebase(songsRef).$asArray();
 
@@ -24,15 +24,21 @@
         return service;
 
         function getSongs() {
-            return songs;
+            var deferred = $q.defer();
+            deferred.resolve(songs);
+            return deferred.promise;
         }
 
         function getMetadata() {
-            return metadata;
+            var deferred = $q.defer();
+            deferred.resolve(metadata);
+            return deferred.promise;
         }
 
         function getVotes() {
-            return votes;
+            var deferred = $q.defer();
+            deferred.resolve(votes);
+            return deferred.promise;
         }
 
         function saveVote(vote) {
