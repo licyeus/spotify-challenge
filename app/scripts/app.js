@@ -13,10 +13,9 @@
         $urlRouterProvider.otherwise('/vote');
 
         $stateProvider
-            .state('vote', {
-                url: '/vote',
-                templateUrl: 'views/vote.html',
-                controller: 'VoteController',
+            .state('main', {
+                abstract: true,
+                template: '<ui-view></ui-view>',
                 resolve: {
                     songs: function(dataContext) {
                         return dataContext.getSongs();
@@ -29,13 +28,21 @@
                     }
                 }
             })
+            .state('vote', {
+                url: '/vote',
+                parent: 'main',
+                templateUrl: 'views/vote.html',
+                controller: 'VoteController'
+            })
             .state('results', {
                 url: '/results',
+                parent: 'main',
                 templateUrl: 'views/results.html',
                 controller: 'ResultsController'
             })
             .state('admin', {
                 url: '/admin',
+                parent: 'main',
                 templateUrl: 'views/admin.html',
                 controller: 'AdminController'
             });

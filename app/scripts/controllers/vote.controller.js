@@ -22,7 +22,7 @@
 
         $scope.getSongName = function(song) {
             return song.artist + ' - ' + song.name;
-        }
+        };
     }
 })();
 

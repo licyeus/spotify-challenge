@@ -25,19 +25,26 @@
 
         function getSongs() {
             var deferred = $q.defer();
-            deferred.resolve(songs);
+            songs.$loaded(function() {
+                deferred.resolve(songs);
+            });
             return deferred.promise;
         }
 
         function getMetadata() {
             var deferred = $q.defer();
+            metadata.$loaded(function() {
+                deferred.resolve(metadata);
+            });
             deferred.resolve(metadata);
             return deferred.promise;
         }
 
         function getVotes() {
             var deferred = $q.defer();
-            deferred.resolve(votes);
+            votes.$loaded(function() {
+                deferred.resolve(votes);
+            });
             return deferred.promise;
         }
 

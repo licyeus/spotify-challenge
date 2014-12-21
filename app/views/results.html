@@ -10,13 +10,9 @@
             <th>Score</th>
         </thead>
         <tbody>
-            <tr ng-repeat="song in songs">
-                <td>
-                    <strong>{{ getSongName(song) }}</strong>
-                </td>
-                <td>
-                    {{ scoreForSong(song) }}
-                </td>
+            <tr ng-repeat="song in songs | orderBy:'score':true">
+                <td>{{ getSongName(song) }}</td>
+                <td>{{ song.score }}</td>
             </tr>
         </tbody>
     </table>
