@@ -3,35 +3,22 @@
 
     angular.module('voteApp').controller('AdminController', AdminController);
 
-    function AdminController($firebase, dataService) {
-        var vm = this;
-        var ref = new Firebase('https://vivid-torch-4819.firebaseio.com/data');
+    function AdminController($scope, metadata, votes, songs) {
+        $scope.votes = votes;
 
-        activate();
-
-        function activate() {
-            vm.data = $firebase(ref).$asObject();
-            vm.data.$loaded().then(function() {
-                vm.data.songs = vm.data.songs || [];
-                vm.data.votes = vm.data.votes || [];
-            });
-        }
-
-        // TODO: create song import process
-
-        vm.addSong = function(song) {
-            song.id = dataService.generateGuid();
-            song.timestamp = Firebase.ServerValue.TIMESTAMP;
-            vm.data.songs.push(song);
-            vm.data.$save();
+        $scope.importSongs = function() {
+            // TODO
+            alert('sorry!');
         };
 
-        vm.songWithId = function(id) {
-            var song = _.find(vm.data.songs, function(song) { return song.id == id; });
-            return song.artist + ' - "' + song.title + '"';
+        $scope.songWithId = function(id) {
+            var song = _.find(songs, function(song) { return song.id == id; });
+            return getSongName(song);
         };
 
-        return vm;
+        function getSongName(song) {
+            return song.artist + ' - ' + song.name;
+        };
     }
 })();
 

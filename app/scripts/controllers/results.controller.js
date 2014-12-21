@@ -7,6 +7,8 @@
         $scope.songs = songs;
         $scope.voteEmail = $state.params.voteEmail;
 
+        votes.$watch(populateVotes);
+
         populateVotes();
 
         function populateVotes() {
