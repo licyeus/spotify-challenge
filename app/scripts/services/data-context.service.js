@@ -6,14 +6,11 @@
     angular.module('voteApp').constant('FIREBASE_URI', 'https://vivid-torch-4819.firebaseio.com');
 
     function dataContext($q, FIREBASE_URI, $firebase) {
-        var songsRef = new Firebase(FIREBASE_URI + '/songs');
-        var songs = $firebase(songsRef).$asArray();
+        var ref = new Firebase(FIREBASE_URI + '/spotify').child('arrayhealth').child('contests').child('0');
 
-        var metadataRef = new Firebase(FIREBASE_URI + '/metadata');
-        var metadata = $firebase(metadataRef).$asObject();
-
-        var votesRef = new Firebase(FIREBASE_URI + '/votes');
-        var votes = $firebase(votesRef).$asArray();
+        var songs = $firebase(ref.child('songs').orderByChild('artist')).$asArray();
+        var metadata = $firebase(ref.child('metadata')).$asObject();
+        var votes = $firebase(ref.child('votes')).$asArray();
 
         var service = {
             getSongs: getSongs,
