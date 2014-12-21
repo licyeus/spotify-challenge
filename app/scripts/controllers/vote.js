@@ -3,34 +3,29 @@
 
     angular.module('voteApp').controller('VoteController', VoteController);
 
-    function VoteController($firebase, dataService) {
-        var vm = this;
-        var ref = new Firebase('https://vivid-torch-4819.firebaseio.com/data');
+    function VoteController($scope, dataContext) {
+        $scope.metadata = dataContext.getMetadata();
+        $scope.songs = dataContext.getSongs();
+        $scope.votes = dataContext.getVotes();
 
-        activate();
+        $scope.email = 'andrew@inkblot.io';
+        $scope.first = "190jyVPHYjAqEaOGmMzdyk";
+        $scope.second = "6bDRVbdZEyBnmOX0Yjh5rf";
+        $scope.third = "0Wl5nDLyOLyYL0vCXjhtt7";
 
-        function activate() {
-            vm.data = $firebase(ref).$asObject();
-            vm.data.$loaded().then(function() {
-                vm.data.songs = vm.data.songs || [];
-                vm.data.votes = vm.data.votes || [];
-            });
-        }
-
-        vm.submitVote = function() {
+        $scope.submitVote = function() {
             var vote = {
-                id: dataService.generateGuid(),
-                email: vm.email,
-                first: vm.first,
-                second: vm.second,
-                third: vm.third,
-                timestamp: Firebase.ServerValue.TIMESTAMP
+                email: $scope.email,
+                first: $scope.first,
+                second: $scope.second,
+                third: $scope.third
             };
-            vm.data.votes.push(vote);
-            vm.data.$save();
+            dataContext.saveVote(vote);
         };
 
-        return vm;
+        $scope.getSongName = function(song) {
+            return song.artist + ' - ' + song.name;
+        }
     }
 })();
 

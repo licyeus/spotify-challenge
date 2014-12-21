@@ -16,7 +16,7 @@
             .state('vote', {
                 url: '/vote',
                 templateUrl: 'views/vote.html',
-                controller: 'VoteController as vote'
+                controller: 'VoteController'
             })
             .state('results', {
                 url: '/results',

@@ -1,7 +1,7 @@
 <div class="container">
     <h4>
-        <span class="text-muted">Week {{ vote.data.weekNumber }}:</span>
-        {{ vote.data.theme }}
+        <span class="text-muted">Week {{ metadata.week }}:</span>
+        {{ metadata.name }}
     </h4>
 
     <div class="instructions">
@@ -15,29 +15,29 @@
 
     <hr>
 
-    <form name="contestVote" ng-submit="vote.submitVote()">
+    <form name="contestVote" ng-submit="submitVote()">
         <div class="form-group">
             <label for="email">Please enter your email address</label>
-            <input class="form-control" type="email" name="email" ng-model="vote.email">
+            <input class="form-control" type="email" name="email" ng-model="email">
         </div>
 
         <div class="form-group">
             <label for="first">First choice (3 points)</label>
-            <select class="form-control" name="first" ng-model="vote.first" ng-options="song.id as song.title for song in vote.data.songs">
+            <select class="form-control" name="first" ng-model="first" ng-options="song.id as getSongName(song) for song in songs">
                 <option value=""></option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="second">Second choice (2 points)</label>
-            <select class="form-control" name="second" ng-model="vote.second" ng-options="song.id as song.title for song in vote.data.songs">
+            <select class="form-control" name="second" ng-model="second" ng-options="song.id as getSongName(song) for song in songs">
                 <option value=""></option>
             </select>
         </div>
 
         <div class="form-group">
             <label for="third">Third choice (1 points)</label>
-            <select class="form-control" name="third" ng-model="vote.third" ng-options="song.id as song.title for song in vote.data.songs">
+            <select class="form-control" name="third" ng-model="third" ng-options="song.id as getSongName(song) for song in songs">
                 <option value=""></option>
             </select>
         </div>
@@ -46,5 +46,7 @@
             <button class="pull-right btn btn-primary" type="submit">Vote</button>
         </div>
     </form>
+
+    <pre>votes: {{ votes | json }}</pre>
 </div>
 
