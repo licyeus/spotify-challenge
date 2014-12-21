@@ -6,19 +6,32 @@
     angular.module('voteApp').constant('FIREBASE_URI', 'https://vivid-torch-4819.firebaseio.com');
 
     function dataContext($q, FIREBASE_URI, $firebase) {
-        var ref = new Firebase(FIREBASE_URI + '/spotify').child('arrayhealth').child('contests').child('0');
-
-        var songs = $firebase(ref.child('songs').orderByChild('artist')).$asArray();
-        var metadata = $firebase(ref.child('metadata')).$asObject();
-        var votes = $firebase(ref.child('votes')).$asArray();
+        var contest, songs, metadata, votes;
 
         var service = {
+            getContest: getContest,
             getSongs: getSongs,
             getVotes: getVotes,
             saveVote: saveVote,
             getMetadata: getMetadata
         };
         return service;
+
+        function getContest(contestName) {
+            var contestRef = new Firebase(FIREBASE_URI + '/spotify').child(contestName);
+            var ref = contestRef.child('contests').child('0');
+
+            contest = $firebase(contestRef.child('metadata')).$asObject();
+            songs = $firebase(ref.child('songs').orderByChild('artist')).$asArray();
+            metadata = $firebase(ref.child('metadata')).$asObject();
+            votes = $firebase(ref.child('votes')).$asArray();
+
+            var deferred = $q.defer();
+            contest.$loaded(function() {
+                deferred.resolve(contest);
+            });
+            return deferred.promise;
+        }
 
         function getSongs() {
             var deferred = $q.defer();

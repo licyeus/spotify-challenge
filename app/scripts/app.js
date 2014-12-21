@@ -10,11 +10,23 @@
     ]);
 
     angular.module('voteApp').config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/vote');
+        $urlRouterProvider.otherwise('/arrayhealth/vote');
 
         $stateProvider
+            .state('contest', {
+                url: '/:contestName',
+                abstract: true,
+                templateUrl: 'views/contest.html',
+                controller: 'ContestController',
+                resolve: {
+                    contest: function($stateParams, dataContext) {
+                        return dataContext.getContest($stateParams.contestName);
+                    }
+                }
+            })
             .state('main', {
                 abstract: true,
+                parent: 'contest',
                 template: '<ui-view></ui-view>',
                 resolve: {
                     songs: function(dataContext) {
