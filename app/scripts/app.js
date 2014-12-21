@@ -36,6 +36,7 @@
             })
             .state('results', {
                 url: '/results',
+                params: { voteEmail: null },
                 parent: 'main',
                 templateUrl: 'views/results.html',
                 controller: 'ResultsController'

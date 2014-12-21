@@ -50,7 +50,7 @@
 
         function saveVote(vote) {
             vote.timestamp = Firebase.ServerValue.TIMESTAMP;
-            votes.$add(vote);
+            return votes.$add(vote);
         }
     }
 })();

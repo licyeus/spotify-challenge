@@ -4,6 +4,10 @@
         {{ theme }}
     </h4>
 
+    <div ng-if="voteEmail" class="alert alert-success">
+        Thanks for your vote, {{ voteEmail }}!
+    </div>
+
     <table class="table table-striped table-bordered">
         <thead>
             <th>Song</th>

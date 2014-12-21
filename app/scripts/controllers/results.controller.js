@@ -3,8 +3,9 @@
 
     angular.module('voteApp').controller('ResultsController', ResultsController);
 
-    function ResultsController($scope, votes, metadata, songs, dataContext) {
+    function ResultsController($scope, $state, votes, metadata, songs, dataContext) {
         $scope.songs = songs;
+        $scope.voteEmail = $state.params.voteEmail;
 
         populateVotes();
 
